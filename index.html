@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Wedding of Khansa & Vinki</title>
+    <style>
+      @font-face {
+        font-family: "allright";
+        src: url("font/jambo.otf"), format("opentype");
+      }
+      body,
+      html {
+        margin: 0;
+        padding: 0;
+        background-image: url("img/bg-image.gif");
+        background-repeat: repeat;
+        background-size: cover;
+        background-position: center center;
+        background-attachment: fixed;
+        font-family: "allright", sans-serif;
+        overflow-x: hidden;
+      }
+
+      #envelope {
+        background: #d7ccc8;
+        width: 100vw;
+        height: 100vh;
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        transition: all 1s ease;
+      }
+      #envelope h2 {
+        font-size: 1.5rem;
+        color: #4e342e;
+      }
+      #open-btn {
+        padding: 1rem 2rem;
+        background: #6d4c41;
+        color: white;
+        border: none;
+        border-radius: 20px;
+        font-size: 1rem;
+        cursor: pointer;
+        margin-top: 2rem;
+        transition: background 0.3s ease;
+      }
+      #open-btn:hover {
+        background: #5d4037;
+      }
+      #main-content {
+        display: none;
+        animation: fadeIn 1s ease forwards;
+      }
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+
+      @keyframes typing {
+        from {
+          width: 0;
+        }
+        to {
+          width: 100%;
+        }
+      }
+      @keyframes blink {
+        0% {
+          border-color: transparent;
+        }
+      }
+
+      @keyframes float {
+        0% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(-15px);
+        }
+        100% {
+          transform: translateY(0);
+        }
+      }
+
+      header {
+        background: #8d6e63;
+        color: white;
+        padding: 2rem 1rem;
+        text-align: center;
+        border-bottom-left-radius: 50% 10%;
+        border-bottom-right-radius: 50% 10%;
+      }
+      header h1 {
+        font-size: 3.5rem;
+        margin: 0;
+      }
+      header p {
+        font-size: 1rem;
+        margin-top: 0.5rem;
+      }
+
+      .typewriter {
+        overflow: hidden;
+        white-space: nowrap;
+        border-right: 2px solid #000;
+        width: 0;
+        animation: typing 4s steps(30, end) forwards,
+          blink 0.75s step-end infinite;
+      }
+
+      .content {
+        padding: 1.5rem;
+        text-align: center;
+      }
+      .card {
+        background: #fff8f0;
+        margin: 1rem auto;
+        padding: 1.2rem;
+        border-radius: 20px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        transition: transform 0.3s ease;
+      }
+      .card:hover {
+        transform: scale(1.02);
+      }
+      .accordion {
+        cursor: pointer;
+        background: #a1887f;
+        color: white;
+        padding: 1rem;
+        margin-top: 1rem;
+        border: none;
+        border-radius: 10px;
+        font-size: 1rem;
+        transition: background 0.3s;
+      }
+      .accordion:hover {
+        background: #6d4c41;
+      }
+      .panel {
+        display: none;
+        overflow: hidden;
+        margin-top: 0.5rem;
+      }
+      .rsvp input,
+      .rsvp textarea {
+        width: 90%;
+        padding: 0.75rem;
+        margin: 0.5rem auto;
+        display: block;
+        border: 1px solid #ccc;
+        border-radius: 10px;
+      }
+      .btn {
+        background: #6d4c41;
+        color: white;
+        padding: 0.7rem 1.2rem;
+        border: none;
+        border-radius: 15px;
+        cursor: pointer;
+        transition: background 0.8s;
+      }
+      .btn:hover {
+        background: #5d4037;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="envelope">
+      <h2>📩 Anda mendapatkan sebuah undangan</h2>
+      <button id="open-btn">Buka Amplop</button>
+    </div>
+
+    <div id="main-content">
+      <header>
+        <h1 class="typewriter">Khansa & Vinki</h1>
+        <p class="typewriter">Wedding Invitation</p>
+      </header>
+
+      <div class="content">
+        <button class="accordion">Akad Nikah</button>
+
+        <div class="panel card">
+          <p><strong>Tanggal:</strong> Senin, 13 Oktober 2025</p>
+          <p><strong>Waktu:</strong> 15.00 WIB - selesai</p>
+          <p>
+            <strong>Tempat:</strong>Jl Candirenggo(kediaman mempelai wanita)
+          </p>
+        </div>
+
+        <button class="accordion">Resepsi</button>
+        <div class="panel card">
+          <p>Tempat : Jl Candirenggo (Kediaman mempelai wanita)</p>
+          <p>Jam : 15.00 - Selesai</p>
+        </div>
+
+        <button class="accordion">📝 RSVP</button>
+        <div class="panel card rsvp">
+          <input type="text" placeholder="Nama Anda" />
+          <textarea rows="3" placeholder="Ucapan & Doa"></textarea>
+          <button class="btn" onclick="submitRSVP()">Kirim</button>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      const acc = document.getElementsByClassName("accordion");
+      for (let i = 0; i < acc.length; i++) {
+        acc[i].addEventListener("click", function () {
+          this.classList.toggle("active");
+          const panel = this.nextElementSibling;
+          if (panel.style.display === "block") {
+            panel.style.display = "none";
+          } else {
+            panel.style.display = "block";
+          }
+        });
+      }
+
+      function submitRSVP() {
+        alert("Terima kasih telah mengonfirmasi kehadiran dan doa Anda!");
+      }
+
+      document
+        .getElementById("open-btn")
+        .addEventListener("click", function () {
+          document.getElementById("envelope").style.display = "none";
+          document.getElementById("main-content").style.display = "block";
+        });
+    </script>
+  </body>
+</html>
